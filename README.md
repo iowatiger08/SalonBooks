@@ -99,5 +99,5 @@ The JSP views are temporary. The planned migration:
 
 ---
 
-**Copyright:** Tony E Dillon-Hansen  
-**License:** CDDL-1.0 — https://opensource.org/licenses/CDDL-1.0
+**Copyright:** Tony E Hansen  
+**License:** MIT — see [LICENSE](LICENSE)
