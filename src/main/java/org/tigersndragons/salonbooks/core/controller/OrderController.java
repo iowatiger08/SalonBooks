@@ -3,10 +3,9 @@ package org.tigersndragons.salonbooks.core.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.joda.time.DateTime;
+import org.apache.commons.collections4.CollectionUtils;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -126,7 +125,7 @@ public class OrderController {
 			orderService.closeOrder(order);
 		}else{
 		Order order = orderFlowActions.convertModelToOrder();
-		order.setUpdateDate(new DateTime());
+		order.setUpdateDate(LocalDateTime.now());
 		orderService.saveOrder(order); 
 		}
 		return "redirect:/person/"+phoneNumberEntered+"/order/"+orderId;
@@ -144,8 +143,8 @@ public class OrderController {
 		Item it= itemService.getItemById(addOrderItemActions.getItemSelect());//new Item();
 		oi.setItem(it);
 		oi.setQuantity(addOrderItemActions.getQuantity());
-		oi.setCreateDate(new DateTime());
-		oi.setUpdateDate(new DateTime());
+		oi.setCreateDate(LocalDateTime.now());
+		oi.setUpdateDate(LocalDateTime.now());
 		orderService.addItemToOrder(oi, oi.getOrder(), oi.getItem());
 		
 		return "redirect:/person/"+phoneNumberEntered+"/order/"+orderId;
@@ -157,12 +156,10 @@ public class OrderController {
 //		orderService.saveAddress(p.getAddress());
 	}
 
-	@Required
 	public void setPersonService(PersonService personService){
 		this.personService= personService;
 	}
 
-	@Required
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}

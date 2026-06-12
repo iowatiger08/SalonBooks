@@ -1,85 +1,43 @@
 package org.tigersndragons.salonbooks.model;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import org.tigersndragons.salonbooks.model.type.ContactType;
 
 @Entity
-@Table(schema="SALONBOOKS",name="CONTACT")
-@AttributeOverride(name="id", column=@Column(name="CONTACT_ID"))
+@Table(schema = "SALONBOOKS", name = "CONTACT")
+@AttributeOverride(name = "id", column = @Column(name = "CONTACT_ID"))
+@Getter
+@Setter
 public class Contact extends SalonObject {
 
-	private static final long serialVersionUID = 1L;
-	private ContactType contactType;
-	private String label;
-	private Person person;
-	private String isActive;
-	
-	private String isURL;
-	private String format;
-	
+    private static final long serialVersionUID = 1L;
 
-	//@Enumerated(EnumType.ORDINAL)
-	@ManyToOne
-	@JoinColumn(name="TYPE_ID")
-	public ContactType getContactType() {
-		return contactType;
-	}
-	public void setContactType(ContactType contactType) {
-		this.contactType = contactType;
-	}
-	@Column(name="LABEL")
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    @ManyToOne
+    @JoinColumn(name = "TYPE_ID")
+    private ContactType contactType;
 
+    @Column(name = "LABEL")
+    private String label;
 
-	@Column(name="ISACTIVE")
-	public String getIsActive() {
-		return isActive;
-	}
-	public void setIsActive(String string) {
-		this.isActive = string;
-	}
-	@Column(name="ISURL")
-	public String getIsURL() {
-		return isURL;
-	}
-	public void setIsURL(String isURL) {
-		this.isURL = isURL;
-	}
+    @ManyToOne
+    @JoinColumn(name = "PERSON_ID")
+    private Person person;
 
-	@Column(name="FORMAT")
-	public String getFormat(){
-		return format;
-	}
-	public void setFormat(String string) {
-		this.format =string;
-		
-	}
-	@ManyToOne
-	@JoinColumn(name="PERSON_ID")
-	public Person getPerson() {
-		return person;
-	}
+    @Column(name = "ISACTIVE")
+    private String isActive;
 
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+    @Column(name = "ISURL")
+    private String isURL;
 
-
+    @Column(name = "FORMAT")
+    private String format;
 }

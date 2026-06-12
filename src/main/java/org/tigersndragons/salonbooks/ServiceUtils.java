@@ -1,7 +1,7 @@
 package org.tigersndragons.salonbooks;
 
-import org.apache.commons.lang.CharUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.CharUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.tigersndragons.salonbooks.exception.ValidationException;
 
 public class ServiceUtils {

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.tigersndragons.salonbooks.model.flows.LoginFlowActions;
 import org.tigersndragons.salonbooks.service.flow.LoginService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @Controller

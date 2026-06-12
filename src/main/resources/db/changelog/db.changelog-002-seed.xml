@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="002-seed-contact-types" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="0"/>
+            <column name="NAME" value="MOBILE_PHONE"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="1"/>
+            <column name="NAME" value="HOME_PHONE"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="2"/>
+            <column name="NAME" value="WORK_PHONE"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="3"/>
+            <column name="NAME" value="FACEBOOK"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="4"/>
+            <column name="NAME" value="TWITTER"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="5"/>
+            <column name="NAME" value="WEB"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" value="6"/>
+            <column name="NAME" value="EMAIL"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-shipping" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="SHIPPING_METHOD">
+            <column name="METHOD_ID" value="0"/>
+            <column name="METHOD_NAME" value="WALKIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-payment" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="PAYMENT_METHOD">
+            <column name="PAYMENT_METHOD_ID" value="0"/>
+            <column name="name" value="CASH"/>
+        </insert>
+        <insert schemaName="SALONBOOKS" tableName="PAYMENT_METHOD">
+            <column name="PAYMENT_METHOD_ID" value="1"/>
+            <column name="name" value="CREDIT"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-employee" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="EMPLOYEE">
+            <column name="EMPLOYEE_ID" value="0"/>
+            <column name="USERNAME" value="default"/>
+            <column name="PASSWORD" value="password1"/>
+            <column name="EMPLOYEE_NAME" value="Default"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-person" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="PERSON">
+            <column name="PERSON_ID" value="0"/>
+            <column name="FIRST_NAME" value="TEST"/>
+            <column name="MIDDLE_NAME" value="Unknown"/>
+            <column name="LAST_NAME" value="TESTER"/>
+            <column name="PREFIX" value="Ms"/>
+            <column name="SUFFIX" value=""/>
+            <column name="BIRTH_DATE" valueDate="1980-01-01"/>
+            <column name="GENDER" value="U"/>
+            <column name="EMAIL" value="default@email.ca"/>
+            <column name="PRIMARY_PHONENUMBER" value="5152201111"/>
+            <column name="TWITTER" value="@default"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-address" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="ADDRESS">
+            <column name="ADDRESS_ID" value="0"/>
+            <column name="LINE1" value="default"/>
+            <column name="CITY" value="Des Moines"/>
+            <column name="STATE" value="IA"/>
+            <column name="ZIPCODE" value="50315"/>
+            <column name="BILLING_ADDRESS" value="1"/>
+            <column name="PERSON_ID" value="0"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-item" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="ITEM">
+            <column name="ITEM_ID" value="0"/>
+            <column name="SKU" value="TEST01"/>
+            <column name="LABEL" value="IS FOR TEST"/>
+            <column name="DESCRIPTION" value="Default test item"/>
+            <column name="PRICE" value="0.01"/>
+            <column name="UNIT_COST" value="0.00"/>
+            <column name="IS_SERVICE" value="1"/>
+            <column name="DELETED_FLAG" value="N"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-appointment" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="APPOINTMENT">
+            <column name="APPOINTMENT_ID" value="0"/>
+            <column name="NOTES" value="TEST DEFAULT"/>
+            <column name="APPOINTMENT_STATUS" value="OPEN"/>
+            <column name="PERSON_ID" value="0"/>
+            <column name="EMPLOYEE_ID" value="0"/>
+            <column name="APPOINTMENT_DATE" valueDate="2014-01-01T10:00:00"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-order" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="ORDER">
+            <column name="ORDER_ID" value="0"/>
+            <column name="TOTAL" value="0.00"/>
+            <column name="SUBTOTAL" value="0.00"/>
+            <column name="TAX" value="0.00"/>
+            <column name="CURRENCY" value="USD"/>
+            <column name="NUM_OF_ITEMS" value="0"/>
+            <column name="SHIPPING" value="0.00"/>
+            <column name="STATUS" value="OPEN"/>
+            <column name="PERSON_ID" value="0"/>
+            <column name="APPOINTMENT_ID" value="0"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="002-seed-contact" author="salonbooks">
+        <insert schemaName="SALONBOOKS" tableName="CONTACT">
+            <column name="CONTACT_ID" value="0"/>
+            <column name="LABEL" value="3196210000"/>
+            <column name="FORMAT" value="3196210000"/>
+            <column name="ISACTIVE" value="Y"/>
+            <column name="ISURL" value="N"/>
+            <column name="TYPE_ID" value="0"/>
+            <column name="PERSON_ID" value="0"/>
+            <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
+            <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

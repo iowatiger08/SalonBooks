@@ -1,7 +1,6 @@
 package org.tigersndragons.salonbooks.core.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +17,7 @@ import org.tigersndragons.salonbooks.service.AppointmentService;
 import org.tigersndragons.salonbooks.service.PersonService;
 import org.tigersndragons.salonbooks.service.flow.LoginService;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -82,12 +81,10 @@ public class HomeController {
 		return "redirect:/person/"+person.getPrimaryPhoneNumber();
 	}
 	
-	@Required
 	public void setPersonService(PersonService personService){
 		this.personService= personService;
 	}
 
-	@Required
 	public void setAppointmentService(AppointmentService appointmentService) {
 		this.appointmentService = appointmentService;
 	}

@@ -5,9 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -85,17 +84,14 @@ public class PersonController {
 		return person;
 		
 	}
-	@Required
 	public void setPersonService(PersonService personService){
 		this.personService= personService;
 	}
 
-	@Required
 	public void setAddressService(AddressService addressService) {
 		this.addressService = addressService;
 	}
 
-	@Required
 	public void setPersonFlowActions(PersonFormModel personFlowActions) {
 		this.personFlowActions = personFlowActions;
 	}

@@ -3,41 +3,35 @@ package org.tigersndragons.salonbooks.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
-import org.tigersndragons.salonbooks.dao.ShipperDAO;
+import org.springframework.stereotype.Service;
 import org.tigersndragons.salonbooks.model.ShippingMethod;
 import org.tigersndragons.salonbooks.model.type.ShipperType;
+import org.tigersndragons.salonbooks.repository.ShipperRepository;
 import org.tigersndragons.salonbooks.service.ShippingMethodService;
 
-public class ShippingMethodServiceImpl extends BaseServiceImpl  implements ShippingMethodService {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ShipperDAO shipperDAO;
-	@Required
-	public void setShipperDAO(ShipperDAO shipperDAO) {
-		this.shipperDAO = shipperDAO;
-	}
+@Service
+public class ShippingMethodServiceImpl extends BaseServiceImpl implements ShippingMethodService {
 
-	public List<ShippingMethod> getListOfActiveShippers() {
-		return shipperDAO.getActiveShipperList();
-	}
+    private static final long serialVersionUID = 1L;
 
-	public ShippingMethod getShipperById(Long id) {
-		return shipperDAO.getObjectById(id);
-	}
+    @Autowired private ShipperRepository shipperRepository;
 
-	public ShippingMethod createShipper() {
-		return new ShippingMethod();
-	}
+    public List<ShippingMethod> getListOfActiveShippers() {
+        return shipperRepository.findAll();
+    }
 
-	public ShippingMethod getDefaultShipper() {
-		ShippingMethod shipper = new ShippingMethod();
-		shipper.setId(0L);
-		shipper.setName(ShipperType.WALKIN);
-		return null;
-	}
+    public ShippingMethod getShipperById(Long id) {
+        return shipperRepository.findById(id).orElse(null);
+    }
 
+    public ShippingMethod createShipper() {
+        return new ShippingMethod();
+    }
+
+    public ShippingMethod getDefaultShipper() {
+        ShippingMethod shipper = new ShippingMethod();
+        shipper.setId(0L);
+        shipper.setName(ShipperType.WALKIN);
+        return shipper;
+    }
 }

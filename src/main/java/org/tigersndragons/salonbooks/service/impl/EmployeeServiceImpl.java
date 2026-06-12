@@ -1,62 +1,37 @@
 package org.tigersndragons.salonbooks.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Service;
 import org.tigersndragons.salonbooks.ServiceUtils;
-import org.tigersndragons.salonbooks.dao.EmployeeDAO;
 import org.tigersndragons.salonbooks.model.Employee;
+import org.tigersndragons.salonbooks.repository.EmployeeRepository;
 import org.tigersndragons.salonbooks.service.EmployeeService;
-import org.tigersndragons.salonbooks.service.EncryptionService;
 
-public class EmployeeServiceImpl extends BaseServiceImpl  implements EmployeeService {
-	
-	
-	private static final long serialVersionUID = 1L;
-	@Autowired
-	private EmployeeDAO employeeDAO;
-	private EncryptionService encryptionService;
-	
-	public Employee getDefaultEmployee() {
-		Employee emp = new Employee();
-		emp.setId(0L);
-		return emp;
-	}
+@Service
+public class EmployeeServiceImpl extends BaseServiceImpl implements EmployeeService {
 
-	public Employee getEmployee(String uname, String pwrd) {
-		// TODO Auto-generated method stub
-		return getDefaultEmployee();
-	}
+    private static final long serialVersionUID = 1L;
 
-	public EmployeeDAO getEmployeeDAO() {
-		return employeeDAO;
-	}
+    @Autowired private EmployeeRepository employeeRepository;
 
-	@Required
-	public void setEmployeeDAO(EmployeeDAO employeeDAO) {
-		this.employeeDAO = employeeDAO;
-	}
+    public Employee getDefaultEmployee() {
+        Employee emp = new Employee();
+        emp.setId(0L);
+        return emp;
+    }
 
-	public Employee getEmployeeById(Long id) {
-		ServiceUtils.assertNotNull("ID cannot be null", id);
-		Employee e=  employeeDAO.getObjectById(id);
-		e.setPassword(e.getPassword());//this.getDecryptedStringForString(e.getPassword()));
-		return e;
-	}
+    public Employee getEmployee(String uname, String pwrd) {
+        return getDefaultEmployee();
+    }
 
-	private String getEncryptedStringForString(String clear){
-		return encryptionService.encryptString(clear);
-	}
-	
-	private String getDecryptedStringForString(String clear){
-		return encryptionService.decryptString(clear);
-	}
-	@Required
-	public void setEncryptionService(EncryptionService encryptionService) {
-		this.encryptionService = encryptionService;
-	}
+    public Employee getEmployeeById(Long id) {
+        ServiceUtils.assertNotNull("ID cannot be null", id);
+        return employeeRepository.findById(id).orElse(null);
+    }
 
-	public java.util.List<Employee> getAllEmployees() {
-		return employeeDAO.getAllEmployees();
-		
-	}
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
 }

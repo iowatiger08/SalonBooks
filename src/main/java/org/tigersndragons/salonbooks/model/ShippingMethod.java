@@ -1,37 +1,27 @@
 package org.tigersndragons.salonbooks.model;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import org.tigersndragons.salonbooks.model.type.ShipperType;
 
 @Entity
-@Table(schema="SALONBOOKS",name="SHIPPING_METHOD")
-@AttributeOverride(name="id", column=@Column(name="METHOD_ID"))
+@Table(schema = "SALONBOOKS", name = "SHIPPING_METHOD")
+@AttributeOverride(name = "id", column = @Column(name = "METHOD_ID"))
+@Getter
+@Setter
 public class ShippingMethod extends SalonObject {
-	
-	private static final long serialVersionUID = 1L;
-	private ShipperType name;//ShipperType.WALKIN;
 
-	@Column(name="METHOD_NAME")
-	@Enumerated(EnumType.STRING)
-	public ShipperType getName() {
-		return name;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public void setName(ShipperType name) {
-		this.name = name;
-	}
-	
-//	@Override
-//	public Long getId(){
-//		return id;
-//	}
+    @Column(name = "METHOD_NAME")
+    @Enumerated(EnumType.STRING)
+    private ShipperType name;
 }

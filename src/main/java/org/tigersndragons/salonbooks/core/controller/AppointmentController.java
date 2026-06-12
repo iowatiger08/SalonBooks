@@ -5,9 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -168,10 +167,10 @@ public class AppointmentController {
 		Employee employee = new Employee();
 		employee.setId(0L);
 		appt.setAppointmentDate(appointmentFlowActions2.getAppointmentDate());
-		appt.setAppointmentDate(appointmentFlowActions2.convertModelToJodaTime());
+		appt.setAppointmentDate(appointmentFlowActions2.convertModelToDateTime());
 		appt.setAppointmentStatusType(appointmentFlowActions2.getAppointmentStatusType());
 		appt.setCreateDate(appointmentFlowActions2.getCreateDate());
-		appt.setUpdateDate(new DateTime());
+		appt.setUpdateDate(LocalDateTime.now());
 		appt.setEmployee(employee);
 		return appt;
 	}
@@ -196,23 +195,19 @@ public class AppointmentController {
 		appointmentService.save(appt);
 	}
 
-	@Required
 	public void setPersonService(PersonService personService){
 		this.personService= personService;
 	}
 
-	@Required
 	public void setAppointmentService(AppointmentService appointmentService) {
 		this.appointmentService = appointmentService;
 	}
 
-	@Required
 	public void setAppointmentFlowActions(
 			AppointmentFormModel appointmentFlowActions) {
 		this.appointmentFlowActions = appointmentFlowActions;
 	}
 
-	@Required
  	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}

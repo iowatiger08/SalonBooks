@@ -1,72 +1,59 @@
 package org.tigersndragons.salonbooks.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 
-import org.apache.commons.lang.ObjectUtils;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
+import lombok.Getter;
+import lombok.Setter;
+
+import org.apache.commons.lang3.ObjectUtils;
 
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class SalonObject implements Entity, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	protected Long id;
-	protected DateTime createDate;
-	protected DateTime updateDate;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof SalonObject 
-				&& obj !=null){
-			return ObjectUtils.equals(this.id, ((SalonObject) obj).getId())	;
-		}
-		return false;
-	}
+    @Column(name = "CREATE_DATE")
+    protected LocalDateTime createDate;
 
-	@Column(name="CREATE_DATE")
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	public DateTime getCreateDate() {
-		return createDate;
-	}
+    @Column(name = "UPDATE_DATE")
+    protected LocalDateTime updateDate;
 
-	public void setCreateDate(DateTime dateTime) {
-		this.createDate = dateTime;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof SalonObject && obj != null) {
+            return ObjectUtils.equals(this.id, ((SalonObject) obj).getId());
+        }
+        return false;
+    }
 
-	@Column(name="UPDATE_DATE")
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	public DateTime getUpdateDate() {
-		return updateDate;
-	}
+    @PrePersist
+    protected void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        if (createDate == null) createDate = now;
+        updateDate = now;
+    }
 
-	public void setUpdateDate(DateTime updateDate) {
-		this.updateDate = updateDate;
-	}
-//	protected List<SalonMatchable> getMatchValues() throws NotMatchableException {
-//		return null;
-//	}
-	public boolean matches(Entity entity) {
-		if(entity == null){
-			//A null here would be odd but this is a safety measure
-			return false;
-		}
-	
-		return false;
-	}
+    @PreUpdate
+    protected void preUpdate() {
+        updateDate = LocalDateTime.now();
+    }
+
+    public boolean matches(Entity entity) {
+        return false;
+    }
 }

@@ -1,13 +1,16 @@
 package org.tigersndragons.salonbooks.model.flows;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.TimeZone;
 
-import org.apache.commons.lang.CharUtils;
-import org.apache.commons.lang.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeField;
-import org.joda.time.DateTimeZone;
+import lombok.Getter;
+import lombok.Setter;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tigersndragons.salonbooks.ServiceUtils;
@@ -20,179 +23,86 @@ import org.tigersndragons.salonbooks.service.EmployeeService;
 import org.tigersndragons.salonbooks.service.PersonService;
 
 @Component
+@Getter
+@Setter
 public class SalonFlows implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Autowired
-	private PersonService personService;
-	@Autowired
-	private EmployeeService employeeService;
-	
-	private String entityMonth;
-	private Long entityDate;
-	private Long entityHour;
-	private Long entityMinute;
-	private Long entityYear;
-	protected TimeZone localeTZ;
+    private static final long serialVersionUID = 1L;
 
-	public Person lookupCustomer(String phoneNumber)
-			throws PersonNotFoundException, ValidationException {
-		Person customer = personService
-				.lookupByPhoneNumber(cleanPhoneNumber(phoneNumber));
-		if (customer != null) {
-			return customer;
-		} else {
-			customer = personService.createPerson(phoneNumber);
-			return customer;
-		}
-	}
+    @Autowired
+    private PersonService personService;
+    @Autowired
+    private EmployeeService employeeService;
 
-	public String cleanPhoneNumber(String number) throws ValidationException {
-		return ServiceUtils.cleanPhoneNumber(number);
+    private String entityMonth;
+    private Long entityDate;
+    private Long entityHour;
+    private Long entityMinute;
+    private Long entityYear;
+    private TimeZone localeTZ;
 
-	}
-	
-	public Employee loginEmployee(String username, String password) throws LoginNotFoundException{
-		try {
-			ServiceUtils.assertNotNull("username cannot be null", username);
-			ServiceUtils.assertNotNull("password cannot be null", password);
-			return employeeService.getEmployee(username, password);
-		} catch (IllegalArgumentException e) {
-			throw new LoginNotFoundException("Invalid login credentials");
-		}
-	}
-	
-	public void convertEntityDateToModel(DateTime entityDt){
-		entityDt=entityDt.withZone( DateTimeZone.forOffsetHours(-6));
-		setEntityDate(new Long(entityDt.dayOfMonth().get()));
-		setEntityHour(new Long(entityDt.hourOfDay().get()));
-		setEntityMinute(new Long (entityDt.minuteOfHour().get()));
-		setEntityMonth(entityDt.monthOfYear().getAsShortText());
-		setEntityYear(new Long(entityDt.year().get()));
-		setLocaleTZ(entityDt.getZone().toTimeZone());
-	}
-	
-	public DateTime convertModelToJodaTime(){
-		if (entityYear==null || entityDate==null){
-			return new DateTime();
-		}
-		DateTime dt = new DateTime(entityYear.intValue(),
-				convertMonthString(entityMonth), 
-				entityDate.intValue(), 
-				entityHour.intValue(), 
-				entityMinute.intValue());
+    public final int[] DATES = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+    public final int[] HOURS = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
+    public final String[] MONTHS = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    public final int[] YEARS = {2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026};
+    public final int[] MINUTES = buildMinutes();
 
-		return dt;
-		
-	}
-	public final int [] DATES ={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-	public final int [] HOURS ={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
-	public final String [] MONTHS ={"Jan","Feb","Mar","Apr", "May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    private int[] buildMinutes() {
+        int[] minutes = new int[60];
+        for (int i = 0; i < 60; i++) minutes[i] = i;
+        return minutes;
+    }
 
-	public final int [] YEARS ={2014,2015,2016,2017};
-	public final int [] MINUTES = getMinuteValues();
-			
-	private int[] getMinuteValues(){
-		int [] minutes= new int [60];
-		int i=0;
-		while (i<60){
-			minutes[i]=i;
-			i++;
-		}
-		return minutes;
-	}
-	private int convertMonthString(String entityMonth2) {
-		if (entityMonth2==null){
-			throw new IllegalArgumentException ("no month provided to read");
-		}
-		int index=0;
-		for (String mon : MONTHS){
-			index++;
-			if (StringUtils.equalsIgnoreCase(mon, entityMonth2)){
-				return index;
-			}
-		}
-		return 0;
-	}
+    public Person lookupCustomer(String phoneNumber) throws PersonNotFoundException, ValidationException {
+        Person customer = personService.lookupByPhoneNumber(cleanPhoneNumber(phoneNumber));
+        if (customer != null) {
+            return customer;
+        }
+        return personService.createPerson(phoneNumber);
+    }
 
-	public String getEntityMonth() {
-		return entityMonth;
-	}
+    public String cleanPhoneNumber(String number) throws ValidationException {
+        return ServiceUtils.cleanPhoneNumber(number);
+    }
 
-	public void setEntityMonth(String entityMonth) {
-		this.entityMonth = entityMonth;
-	}
+    public Employee loginEmployee(String username, String password) throws LoginNotFoundException {
+        try {
+            ServiceUtils.assertNotNull("username cannot be null", username);
+            ServiceUtils.assertNotNull("password cannot be null", password);
+            return employeeService.getEmployee(username, password);
+        } catch (IllegalArgumentException e) {
+            throw new LoginNotFoundException("Invalid login credentials");
+        }
+    }
 
-	public Long getEntityDate() {
-		return entityDate;
-	}
+    public void convertEntityDateToModel(LocalDateTime entityDt) {
+        LocalDateTime shifted = entityDt.atOffset(ZoneOffset.ofHours(-6)).toLocalDateTime();
+        entityDate = (long) shifted.getDayOfMonth();
+        entityHour = (long) shifted.getHour();
+        entityMinute = (long) shifted.getMinute();
+        entityMonth = shifted.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        entityYear = (long) shifted.getYear();
+        localeTZ = TimeZone.getTimeZone(ZoneOffset.ofHours(-6));
+    }
 
-	public void setEntityDate(Long entityDate) {
-		this.entityDate = entityDate;
-	}
+    public LocalDateTime convertModelToDateTime() {
+        if (entityYear == null || entityDate == null) {
+            return LocalDateTime.now();
+        }
+        return LocalDateTime.of(
+            entityYear.intValue(),
+            convertMonthString(entityMonth),
+            entityDate.intValue(),
+            entityHour == null ? 0 : entityHour.intValue(),
+            entityMinute == null ? 0 : entityMinute.intValue()
+        );
+    }
 
-	public Long getEntityHour() {
-		return entityHour;
-	}
-
-	public void setEntityHour(Long entityHour) {
-		this.entityHour = entityHour;
-	}
-
-	public Long getEntityMinute() {
-		return entityMinute;
-	}
-
-	public void setEntityMinute(Long entityMinute) {
-		this.entityMinute = entityMinute;
-	}
-
-	public Long getEntityYear() {
-		return entityYear;
-	}
-
-	public void setEntityYear(Long entityYear) {
-		this.entityYear = entityYear;
-	}
-
-	public void setPersonService(PersonService personService) {
-		this.personService = personService;
-	}
-
-	public void setEmployeeService(EmployeeService employeeService) {
-		this.employeeService = employeeService;
-	}
-
-	public int[] getDATES() {
-		return DATES;
-	}
-
-	public int[] getHOURS() {
-		return HOURS;
-	}
-
-	public String[] getMONTHS() {
-		return MONTHS;
-	}
-
-	public  int[] getDates() {
-		return DATES;
-	}
-
-	public  int[] getHours() {
-		return HOURS;
-	}
-
-	public  int[] getYears() {
-		return YEARS;
-	}
-
-	public TimeZone getLocaleTZ() {
-		return localeTZ;
-	}
-
-	public void setLocaleTZ(TimeZone localeTZ) {
-		this.localeTZ = localeTZ;
-	}
-	
+    private int convertMonthString(String month) {
+        if (month == null) throw new IllegalArgumentException("no month provided");
+        for (int i = 0; i < MONTHS.length; i++) {
+            if (StringUtils.equalsIgnoreCase(MONTHS[i], month)) return i + 1;
+        }
+        return 0;
+    }
 }

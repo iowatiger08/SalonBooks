@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="001-create-schema" author="salonbooks">
+        <sql>CREATE SCHEMA IF NOT EXISTS SALONBOOKS</sql>
+    </changeSet>
+
+    <changeSet id="001-employee" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="EMPLOYEE">
+            <column name="EMPLOYEE_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="EMPLOYEE_NAME" type="VARCHAR(200)"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001-person" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="PERSON">
+            <column name="PERSON_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(100)"/>
+            <column name="MIDDLE_NAME" type="VARCHAR(100)"/>
+            <column name="LAST_NAME" type="VARCHAR(100)"/>
+            <column name="PREFIX" type="VARCHAR(20)"/>
+            <column name="SUFFIX" type="VARCHAR(20)"/>
+            <column name="BIRTH_DATE" type="DATE"/>
+            <column name="GENDER" type="VARCHAR(10)"/>
+            <column name="EMAIL" type="VARCHAR(200)"/>
+            <column name="HOME_PHONE" type="VARCHAR(20)"/>
+            <column name="PRIMARY_PHONENUMBER" type="VARCHAR(20)"/>
+            <column name="TWITTER" type="VARCHAR(100)"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001-appointment" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="APPOINTMENT">
+            <column name="APPOINTMENT_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APPOINTMENT_DATE" type="TIMESTAMP"/>
+            <column name="NOTES" type="VARCHAR(500)"/>
+            <column name="APPOINTMENT_STATUS" type="VARCHAR(20)"/>
+            <column name="PERSON_ID" type="BIGINT"/>
+            <column name="EMPLOYEE_ID" type="BIGINT"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="APPOINTMENT"
+            baseColumnNames="PERSON_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="PERSON"
+            referencedColumnNames="PERSON_ID"
+            constraintName="FK_APPT_PERSON"/>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="APPOINTMENT"
+            baseColumnNames="EMPLOYEE_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="EMPLOYEE"
+            referencedColumnNames="EMPLOYEE_ID"
+            constraintName="FK_APPT_EMPLOYEE"/>
+    </changeSet>
+
+    <changeSet id="001-payment-method" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="PAYMENT_METHOD">
+            <column name="PAYMENT_METHOD_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001-shipping-method" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="SHIPPING_METHOD">
+            <column name="METHOD_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="METHOD_NAME" type="VARCHAR(50)"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001-order" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="ORDER">
+            <column name="ORDER_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TOTAL" type="DECIMAL(10,2)"/>
+            <column name="SUBTOTAL" type="DECIMAL(10,2)"/>
+            <column name="TAX" type="DECIMAL(10,2)"/>
+            <column name="CURRENCY" type="VARCHAR(10)"/>
+            <column name="NUM_OF_ITEMS" type="INT"/>
+            <column name="SHIPPING" type="DECIMAL(10,2)"/>
+            <column name="STATUS" type="VARCHAR(20)"/>
+            <column name="PERSON_ID" type="BIGINT"/>
+            <column name="APPOINTMENT_ID" type="BIGINT"/>
+            <column name="PAYMENT_METHOD_ID" type="BIGINT"/>
+            <column name="SHIPPER_ID" type="BIGINT"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="ORDER"
+            baseColumnNames="PERSON_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="PERSON"
+            referencedColumnNames="PERSON_ID"
+            constraintName="FK_ORDER_PERSON"/>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="ORDER"
+            baseColumnNames="APPOINTMENT_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="APPOINTMENT"
+            referencedColumnNames="APPOINTMENT_ID"
+            constraintName="FK_ORDER_APPT"/>
+    </changeSet>
+
+    <changeSet id="001-item" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="ITEM">
+            <column name="ITEM_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="SKU" type="VARCHAR(50)"/>
+            <column name="LABEL" type="VARCHAR(200)"/>
+            <column name="DESCRIPTION" type="VARCHAR(500)"/>
+            <column name="PRICE" type="DECIMAL(10,2)"/>
+            <column name="UNIT_COST" type="DECIMAL(10,2)"/>
+            <column name="IS_SERVICE" type="INT"/>
+            <column name="DELETED_FLAG" type="VARCHAR(1)" defaultValue="N"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001-order-items" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="ORDER_ITEMS">
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ITEM_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="QUANTITY" type="DECIMAL(10,2)"/>
+            <column name="NOTES" type="VARCHAR(500)"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+        <addPrimaryKey schemaName="SALONBOOKS" tableName="ORDER_ITEMS"
+            columnNames="ORDER_ID,ITEM_ID"
+            constraintName="PK_ORDER_ITEMS"/>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="ORDER_ITEMS"
+            baseColumnNames="ORDER_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="ORDER"
+            referencedColumnNames="ORDER_ID"
+            constraintName="FK_ORDERITEM_ORDER"/>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="ORDER_ITEMS"
+            baseColumnNames="ITEM_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="ITEM"
+            referencedColumnNames="ITEM_ID"
+            constraintName="FK_ORDERITEM_ITEM"/>
+    </changeSet>
+
+    <changeSet id="001-address" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="ADDRESS">
+            <column name="ADDRESS_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LINE1" type="VARCHAR(200)"/>
+            <column name="LINE2" type="VARCHAR(200)"/>
+            <column name="CITY" type="VARCHAR(100)"/>
+            <column name="STATE" type="VARCHAR(2)"/>
+            <column name="ZIPCODE" type="VARCHAR(5)"/>
+            <column name="ZIP4" type="VARCHAR(4)"/>
+            <column name="BILLING_ADDRESS" type="INT" defaultValueNumeric="0"/>
+            <column name="PERSON_ID" type="BIGINT"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="ADDRESS"
+            baseColumnNames="PERSON_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="PERSON"
+            referencedColumnNames="PERSON_ID"
+            constraintName="FK_ADDRESS_PERSON"/>
+    </changeSet>
+
+    <changeSet id="001-contact-type" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="CONTACT_TYPE">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001-contact" author="salonbooks">
+        <createTable schemaName="SALONBOOKS" tableName="CONTACT">
+            <column name="CONTACT_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LABEL" type="VARCHAR(200)"/>
+            <column name="FORMAT" type="VARCHAR(200)"/>
+            <column name="ISACTIVE" type="VARCHAR(1)"/>
+            <column name="ISURL" type="VARCHAR(1)"/>
+            <column name="TYPE_ID" type="BIGINT"/>
+            <column name="PERSON_ID" type="BIGINT"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="CONTACT"
+            baseColumnNames="PERSON_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="PERSON"
+            referencedColumnNames="PERSON_ID"
+            constraintName="FK_CONTACT_PERSON"/>
+        <addForeignKeyConstraint baseTableSchemaName="SALONBOOKS" baseTableName="CONTACT"
+            baseColumnNames="TYPE_ID"
+            referencedTableSchemaName="SALONBOOKS" referencedTableName="CONTACT_TYPE"
+            referencedColumnNames="ID"
+            constraintName="FK_CONTACT_TYPE"/>
+    </changeSet>
+
+</databaseChangeLog>

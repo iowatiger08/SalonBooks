@@ -3,7 +3,7 @@ package org.tigersndragons.salonbooks.core.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,8 +65,8 @@ public class ItemController {
 		it.setLabel(addItemActions.getLabel());
 		it.setSku(addItemActions.getSku());
 		it.setPrice(addItemActions.getPrice());
-		it.setCreateDate(new DateTime());
-		it.setUpdateDate(new DateTime());
+		it.setCreateDate(LocalDateTime.now());
+		it.setUpdateDate(LocalDateTime.now());
 //		oi.setNotes(addOrderItemActions.)
 		itemService.saveItem(it);
 		return "redirect:/item/list";

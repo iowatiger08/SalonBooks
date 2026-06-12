@@ -1,7 +1,6 @@
 package org.tigersndragons.salonbooks.service.flow.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +9,9 @@ import org.tigersndragons.salonbooks.model.flows.LoginFlowActions;
 import org.tigersndragons.salonbooks.service.EmployeeService;
 import org.tigersndragons.salonbooks.service.flow.LoginService;
 
+import org.springframework.stereotype.Service;
+
+@Service
 @Transactional
 public class LoginServiceImpl implements LoginService, MessageSourceAware {
 	@Autowired
@@ -31,7 +33,6 @@ public class LoginServiceImpl implements LoginService, MessageSourceAware {
 
 		return doLogin();
 	}
-	@Required
 	public void setEmployeeService(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}

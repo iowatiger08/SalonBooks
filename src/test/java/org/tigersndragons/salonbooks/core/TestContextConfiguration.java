@@ -1,35 +1,14 @@
 package org.tigersndragons.salonbooks.core;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
-
-@Configuration
-@Import({
-	ServiceConfiguration.class,
-	FlowConfiguration.class,
-	DAOConfiguration.class,
-	WebMVCConfiguration.class
-//	MockRepositoryConfiguration.class
-})
+/**
+ * Marker class kept for reference; test classes now use @SpringBootTest directly.
+ */
+@SpringBootTest
+@ActiveProfiles("dev")
+@Transactional
 public class TestContextConfiguration {
-
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer  propertyPlaceholderConfigurator(){
-		PropertySourcesPlaceholderConfigurer  configurator = new PropertySourcesPlaceholderConfigurer();
-		configurator.setLocations(new Resource[] {
-			new ClassPathResource("props/default.properties")
-		});
-		return configurator;
-	}
-
-//	@Bean
-//	public PlatformTransactionManager hibernateTransactionManager(){
-//		return new MockPlatformTransactionManager();
-//	}
 }
