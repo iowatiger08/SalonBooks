@@ -1,34 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Welcome to SalonBooks</title>
-  <jsp:include page="../includes/headTag.jsp"/>
+  <meta charset="utf-8"/>
+  <title>SalonBooks – Login</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 </head>
 <body>
-<div class="container" id="pageBox" style="width:500px">
-  <div>Welcome to SalonBooks!!</div>
-  <br/>
+<div class="container" style="max-width:420px; margin-top:60px;">
+  <h3>SalonBooks</h3>
 
-  <c:if test="${param.error != null}">
-    <div style="color:red">Invalid username or password.</div>
-  </c:if>
-  <c:if test="${param.logout != null}">
-    <div style="color:green">You have been logged out.</div>
-  </c:if>
+<%
+  if (request.getParameter("error") != null) {
+%>
+  <div class="alert alert-danger">Invalid username or password.</div>
+<%
+  }
+  if (request.getParameter("logout") != null) {
+%>
+  <div class="alert alert-success">You have been logged out.</div>
+<%
+  }
+%>
 
-  <form method="POST" action="<c:url value='/login'/>">
-    User: <br/><input type="text" name="username"/>
-    <br/>
-    Passcode: <br/><input type="password" name="password"/>
-    <br/>
-    <input type="submit" value="Login"/>
+  <form method="POST" action="/login">
+    <div class="form-group">
+      <label>Username</label>
+      <input class="form-control" type="text" name="username" autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" name="password"/>
+    </div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button class="btn btn-primary" type="submit">Login</button>
   </form>
 </div>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
