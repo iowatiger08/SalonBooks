@@ -15,11 +15,11 @@ import org.tigersndragons.salonbooks.model.Person;
 @Transactional
 public abstract class BaseTestCase {
 
-    protected Logger logger = LoggerFactory.getLogger(getClass());
+  protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected Person getDefaultPerson() {
-        Person person = new Person();
-        person.setId(0L);
-        return person;
-    }
+  protected Person getDefaultPerson() {
+    Person person = new Person();
+    person.setId(0L);
+    return person;
+  }
 }

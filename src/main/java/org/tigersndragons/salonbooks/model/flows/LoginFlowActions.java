@@ -1,10 +1,8 @@
 package org.tigersndragons.salonbooks.model.flows;
 
 import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Setter
 public class LoginFlowActions implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    private String username;
-    private String password;
+  private static final long serialVersionUID = 1L;
+  private String username;
+  private String password;
 }

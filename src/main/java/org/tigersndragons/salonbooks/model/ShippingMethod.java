@@ -6,10 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
-
 import lombok.Getter;
 import lombok.Setter;
-
 import org.tigersndragons.salonbooks.model.type.ShipperType;
 
 @Entity
@@ -19,9 +17,9 @@ import org.tigersndragons.salonbooks.model.type.ShipperType;
 @Setter
 public class ShippingMethod extends SalonObject {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Column(name = "METHOD_NAME")
-    @Enumerated(EnumType.STRING)
-    private ShipperType name;
+  @Column(name = "METHOD_NAME")
+  @Enumerated(EnumType.STRING)
+  private ShipperType name;
 }

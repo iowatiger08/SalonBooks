@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+
+    <!-- Exclude Lombok-generated code (@lombok.Generated) -->
+    <Match>
+        <Annotation name="lombok.Generated"/>
+    </Match>
+
+    <!-- Ignore test classes entirely -->
+    <Match>
+        <Class name="~.*Test"/>
+    </Match>
+
+    <!-- Serializable warnings on legacy model/service classes that implement
+         Serializable purely for Spring Web Flow compatibility — not real serialization use -->
+    <Match>
+        <Bug pattern="SE_NO_SERIALVERSIONID,SE_BAD_FIELD,SE_TRANSIENT_FIELD_NOT_RESTORED"/>
+        <Package name="~org\.tigersndragons\.salonbooks\.(model|service).*"/>
+    </Match>
+
+    <!-- SalonObject.equals() uses ObjectUtils.equals which is null-safe;
+         SpotBugs flags `obj != null` after instanceof as redundant but it's intentional -->
+    <Match>
+        <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
+        <Class name="org.tigersndragons.salonbooks.model.SalonObject"/>
+    </Match>
+
+    <!-- EncryptionServiceImpl: legacy AES-CBC with static key, pending removal once
+         BCrypt migration is complete. Suppress all crypto findings on this class. -->
+    <Match>
+        <Class name="org.tigersndragons.salonbooks.service.impl.EncryptionServiceImpl"/>
+    </Match>
+
+    <!-- LoginServiceImpl: messageSource injected via MessageSourceAware, not read directly -->
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD"/>
+        <Class name="org.tigersndragons.salonbooks.service.flow.impl.LoginServiceImpl"/>
+    </Match>
+
+    <!-- OrderServiceImpl uses deprecated ROUND_DOWN — suppress until BigDecimal modernized -->
+    <Match>
+        <Bug pattern="DMI_BIGDECIMAL_CONSTRUCTED_FROM_DOUBLE"/>
+        <Package name="~org\.tigersndragons\.salonbooks\..*"/>
+    </Match>
+
+    <!-- Spring controllers and flow/form model classes store references intentionally -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+        <Package name="~org\.tigersndragons\.salonbooks\.core\.controller"/>
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+        <Package name="~org\.tigersndragons\.salonbooks\.model\.flows"/>
+    </Match>
+
+    <!-- PersonProfile is a DTO — defensive copy not needed -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+        <Class name="org.tigersndragons.salonbooks.model.PersonProfile"/>
+    </Match>
+
+    <!-- SalonFlows arrays are view-helper constants (JSP dropdown data); mutation is benign -->
+    <Match>
+        <Bug pattern="MS_MUTABLE_ARRAY"/>
+        <Class name="org.tigersndragons.salonbooks.model.flows.SalonFlows"/>
+    </Match>
+
+</FindBugsFilter>

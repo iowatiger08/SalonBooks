@@ -9,8 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(schema = "SALONBOOKS", name = "CONTACT_TYPE")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "ID")),
-    @AttributeOverride(name = "name", column = @Column(name = "NAME"))
+  @AttributeOverride(name = "id", column = @Column(name = "ID")),
+  @AttributeOverride(name = "name", column = @Column(name = "NAME"))
 })
-public class ContactType extends BaseLookup {
-}
+public class ContactType extends BaseLookup {}

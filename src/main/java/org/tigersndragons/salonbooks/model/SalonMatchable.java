@@ -1,5 +1,3 @@
 package org.tigersndragons.salonbooks.model;
 
-public class SalonMatchable {
-
-}
+public class SalonMatchable {}

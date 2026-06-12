@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
+    "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+<suppressions>
+    <!-- Test code: relax visibility rules -->
+    <suppress checks="VisibilityModifier" files=".*[\\/]test[\\/].*"/>
+
+    <!-- Legacy flow/model classes: complex state objects, visibility expected -->
+    <suppress checks="VisibilityModifier" files=".*[\\/]model[\\/]flows[\\/].*"/>
+
+    <!-- Controllers use package-private field injection; relax visibility -->
+    <suppress checks="VisibilityModifier" files=".*[\\/]controller[\\/].*"/>
+
+    <!-- SalonObject has protected fields intentionally shared with subclasses -->
+    <suppress checks="VisibilityModifier" files="SalonObject.java"/>
+    <suppress checks="VisibilityModifier" files="OrderItem.java"/>
+</suppressions>

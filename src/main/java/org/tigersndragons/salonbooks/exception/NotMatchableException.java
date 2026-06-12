@@ -1,5 +1,3 @@
 package org.tigersndragons.salonbooks.exception;
 
-public class NotMatchableException extends Exception {
-
-}
+public class NotMatchableException extends Exception {}

@@ -1,7 +1,5 @@
 package org.tigersndragons.salonbooks.model;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,10 +8,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
 
 @Entity
@@ -23,23 +20,23 @@ import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
 @Setter
 public class Appointment extends SalonObject {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Column(name = "APPOINTMENT_DATE")
-    private LocalDateTime appointmentDate;
+  @Column(name = "APPOINTMENT_DATE")
+  private LocalDateTime appointmentDate;
 
-    @Column(name = "NOTES")
-    private String notes;
+  @Column(name = "NOTES")
+  private String notes;
 
-    @ManyToOne
-    @JoinColumn(name = "PERSON_ID")
-    private Person person;
+  @ManyToOne
+  @JoinColumn(name = "PERSON_ID")
+  private Person person;
 
-    @ManyToOne
-    @JoinColumn(name = "EMPLOYEE_ID")
-    private Employee employee;
+  @ManyToOne
+  @JoinColumn(name = "EMPLOYEE_ID")
+  private Employee employee;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "APPOINTMENT_STATUS")
-    private AppointmentStatusType appointmentStatusType;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "APPOINTMENT_STATUS")
+  private AppointmentStatusType appointmentStatusType;
 }

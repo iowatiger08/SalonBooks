@@ -1,35 +1,32 @@
 package org.tigersndragons.salonbooks.service;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
 import org.tigersndragons.salonbooks.model.Person;
 import org.tigersndragons.salonbooks.model.PersonProfile;
-@Service
+
 public interface PersonService {
 
-	public Person lookupByPhoneNumber(String phoneNumber);
-	
-	public Person lookupByLastName(String lastName);
-	
-	public List<Person> getListOfActivePersons();
-	
-	public Person getPersonById(Long id);
-	
-	public Person createPerson();
+  Person lookupByPhoneNumber(String phoneNumber);
 
-	public Person getDefaultPerson();
-	
-	public Person createPerson(String phoneNumber) ;
+  Person lookupByLastName(String lastName);
 
-	public void save(Person person);
-	
-	public PersonProfile getPersonProfile(Person person);
-	
-	public PersonProfile createPersonProfile();
+  List<Person> getListOfActivePersons();
 
-	public PersonProfile createPersonProfile(Person person);
-	
-	public PersonProfile updatePersonProfile (PersonProfile profile);
-	
+  Person getPersonById(Long id);
+
+  Person createPerson();
+
+  Person getDefaultPerson();
+
+  Person createPerson(String phoneNumber);
+
+  void save(Person person);
+
+  PersonProfile getPersonProfile(Person person);
+
+  PersonProfile createPersonProfile();
+
+  PersonProfile createPersonProfile(Person person);
+
+  PersonProfile updatePersonProfile(PersonProfile profile);
 }

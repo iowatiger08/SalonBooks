@@ -1,33 +1,31 @@
 package org.tigersndragons.salonbooks.service;
 
 import java.util.List;
-
 import org.tigersndragons.salonbooks.model.Appointment;
 import org.tigersndragons.salonbooks.model.Employee;
 import org.tigersndragons.salonbooks.model.Person;
 
 public interface AppointmentService {
 
-	public List<Appointment> getOpenAppointments();
+  List<Appointment> getOpenAppointments();
 
-	public List<Appointment> getOpenAppointmentsForEmployee(Employee emp);
-	
-	public Appointment createAppointmentForPerson(Person person);
-	
-	public List<Appointment> getAppointmentsForPerson(Person p, Employee emp);
-	
-//	public Appointment createAppointment();
-	
-	public void startAppointment(Appointment anAppointment);
-	
-	public Appointment assignAppointmenttoPerson(Appointment appt, Person person);
-	
-	public void closeAppointment(Appointment appt);
+  List<Appointment> getOpenAppointmentsForEmployee(Employee emp);
 
-	public Appointment getAppointmentById(long l);
+  Appointment createAppointmentForPerson(Person person);
 
-	public List<Appointment>  getAppointmentsByPerson(Person defaultPerson, Employee emp);
+  List<Appointment> getAppointmentsForPerson(Person p, Employee emp);
 
-	public void save(Appointment theAppointment);
+  //  public Appointment createAppointment();
 
+  void startAppointment(Appointment anAppointment);
+
+  Appointment assignAppointmenttoPerson(Appointment appt, Person person);
+
+  void closeAppointment(Appointment appt);
+
+  Appointment getAppointmentById(long l);
+
+  List<Appointment> getAppointmentsByPerson(Person defaultPerson, Employee emp);
+
+  void save(Appointment theAppointment);
 }

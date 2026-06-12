@@ -5,15 +5,15 @@ import org.tigersndragons.salonbooks.model.Item;
 
 @Component
 public class ItemFlowActions extends SalonFlows {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private Item[] itemList;
-	
-	public Item[] getItemList() {
-		return itemList;
-	}
+  private Item[] itemList;
 
-	public void setItemList(Item[] itemList) {
-		this.itemList = itemList;
-	}
+  public Item[] getItemList() {
+    return itemList;
+  }
+
+  public void setItemList(Item[] itemList) {
+    this.itemList = itemList;
+  }
 }

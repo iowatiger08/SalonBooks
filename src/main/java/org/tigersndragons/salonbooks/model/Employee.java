@@ -4,10 +4,8 @@ import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-
 import lombok.Getter;
 import lombok.Setter;
-
 import org.hibernate.annotations.NaturalId;
 
 @Entity
@@ -17,15 +15,15 @@ import org.hibernate.annotations.NaturalId;
 @Setter
 public class Employee extends SalonObject {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Column(name = "USERNAME", unique = true)
-    @NaturalId
-    private String username;
+  @Column(name = "USERNAME", unique = true)
+  @NaturalId
+  private String username;
 
-    @Column(name = "PASSWORD")
-    private String password;
+  @Column(name = "PASSWORD")
+  private String password;
 
-    @Column(name = "EMPLOYEE_NAME")
-    private String name;
+  @Column(name = "EMPLOYEE_NAME")
+  private String name;
 }

@@ -12,16 +12,17 @@ import org.tigersndragons.salonbooks.repository.EmployeeRepository;
 @Service
 public class SalonUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+  @Autowired private EmployeeRepository employeeRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Employee employee = employeeRepository.findByUsername(username)
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Employee employee =
+        employeeRepository
+            .findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        return User.withUsername(employee.getUsername())
-            .password(employee.getPassword())
-            .roles("USER")
-            .build();
-    }
+    return User.withUsername(employee.getUsername())
+        .password(employee.getPassword())
+        .roles("USER")
+        .build();
+  }
 }

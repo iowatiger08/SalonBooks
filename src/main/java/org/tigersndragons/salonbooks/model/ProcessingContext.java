@@ -1,24 +1,20 @@
 package org.tigersndragons.salonbooks.model;
 
-
 public interface ProcessingContext {
 
-	public void pushNode(Object left, Object right, String fieldName);
+  void pushNode(Object left, Object right, String fieldName);
 
-	public void popNode(Object choosenObject);
+  void popNode(Object choosenObject);
 
+  void markObjectReplaced(Object old, Object newObj);
 
-	public void markObjectReplaced(Object old, Object newObj);
+  boolean hasObjectBeenReplaced(Object obj);
 
-	public boolean hasObjectBeenReplaced(Object obj);
+  Object getReplacementObject(Object obj);
 
-	public Object getReplacementObject(Object obj);
-	
-	public void dumpReplacementMap();
+  void dumpReplacementMap();
 
-	public String getNodeStackLog();
+  String getNodeStackLog();
 
-	public int getNextUniqueKey();
-	
-	
+  int getNextUniqueKey();
 }

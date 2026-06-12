@@ -11,24 +11,23 @@ import org.tigersndragons.salonbooks.service.EncryptionService;
 
 public class EncryptionTest extends BaseTestCase {
 
-    @Autowired
-    EncryptionService encryptionService;
+  @Autowired EncryptionService encryptionService;
 
-    @Test
-    public void testEncryption() {
-        String pswd = "password1";
-        String encryptedPswd = encryptionService.encryptString(pswd);
-        assertNotNull(encryptedPswd);
-        String decryptedPswd = encryptionService.decryptString(encryptedPswd);
-        assertTrue(StringUtils.equals(decryptedPswd, pswd));
-    }
+  @Test
+  public void testEncryption() {
+    String pswd = "password1";
+    String encryptedPswd = encryptionService.encryptString(pswd);
+    assertNotNull(encryptedPswd);
+    String decryptedPswd = encryptionService.decryptString(encryptedPswd);
+    assertTrue(StringUtils.equals(decryptedPswd, pswd));
+  }
 
-    @Disabled
-    @Test
-    public void testEncryptionCoded() {
-        String pswd = "password1";
-        String encryptedPswd = encryptionService.encryptString(pswd);
-        assertNotNull(encryptedPswd);
-        assertTrue(StringUtils.equals(encryptedPswd, "uJSU3i56jEmQv6GnNY4FYQ=="));
-    }
+  @Disabled
+  @Test
+  public void testEncryptionCoded() {
+    String pswd = "password1";
+    String encryptedPswd = encryptionService.encryptString(pswd);
+    assertNotNull(encryptedPswd);
+    assertTrue(StringUtils.equals(encryptedPswd, "uJSU3i56jEmQv6GnNY4FYQ=="));
+  }
 }

@@ -8,12 +8,12 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class SalonBooksApplication extends SpringBootServletInitializer {
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(SalonBooksApplication.class);
-    }
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    return builder.sources(SalonBooksApplication.class);
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.run(SalonBooksApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(SalonBooksApplication.class, args);
+  }
 }

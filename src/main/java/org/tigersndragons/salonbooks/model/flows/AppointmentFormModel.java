@@ -1,11 +1,8 @@
 package org.tigersndragons.salonbooks.model.flows;
 
 import java.time.LocalDateTime;
-import java.util.TimeZone;
-
 import lombok.Getter;
 import lombok.Setter;
-
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
@@ -16,13 +13,13 @@ import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
 @Setter
 public class AppointmentFormModel extends SalonFlows {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private String notes;
-    private Long appointmentId;
-    private Long personId;
-    private LocalDateTime appointmentDate;
-    private boolean addOrdertoAppointment = false;
-    private LocalDateTime createDate;
-    private AppointmentStatusType appointmentStatusType;
+  private String notes;
+  private Long appointmentId;
+  private Long personId;
+  private LocalDateTime appointmentDate;
+  private boolean addOrdertoAppointment = false;
+  private LocalDateTime createDate;
+  private AppointmentStatusType appointmentStatusType;
 }

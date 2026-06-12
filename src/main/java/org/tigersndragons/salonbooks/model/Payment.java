@@ -1,5 +1,3 @@
 package org.tigersndragons.salonbooks.model;
 
-public class Payment {
-
-}
+public class Payment {}
