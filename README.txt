@@ -28,7 +28,7 @@ Use at own risk. No guarantees implied.
 
 Copyright
 ---------
-Initial Developer: Tony E Dillon-Hansen
+Initial Developer: Tony E Hansen
 
 Source released under license
 ------------------------------
