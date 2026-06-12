@@ -51,7 +51,7 @@ public class EmployeeTest extends BaseTestCase {
     emp.setId(0L);
     emp.setName("Default");
     emp.setUsername("default");
-    emp.setPassword("password1");
+    emp.setPassword("$2a$10$alH44bihPqsHhJEdeYGqK.DbEAvu33OUGIu2Csi/9T6sLDPopGOY6");
     return emp;
   }
 

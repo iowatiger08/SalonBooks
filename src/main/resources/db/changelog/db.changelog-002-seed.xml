@@ -58,7 +58,7 @@
         <insert schemaName="SALONBOOKS" tableName="EMPLOYEE">
             <column name="EMPLOYEE_ID" value="0"/>
             <column name="USERNAME" value="default"/>
-            <column name="PASSWORD" value="password1"/>
+            <column name="PASSWORD" value="$2a$10$alH44bihPqsHhJEdeYGqK.DbEAvu33OUGIu2Csi/9T6sLDPopGOY6"/>
             <column name="EMPLOYEE_NAME" value="Default"/>
             <column name="CREATE_DATE" valueDate="2014-01-01T00:00:00"/>
             <column name="UPDATE_DATE" valueDate="2014-01-01T00:00:00"/>
