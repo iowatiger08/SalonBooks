@@ -8,7 +8,8 @@
 </head>
 
 <body>
-	<div class="container" id="pageBox" style="width: 600px">
+<jsp:include page="../includes/navbar.jsp"/>
+	<div class="container" id="pageBox">
 		<h2>
 			Store Item List | Date:
 			${now}

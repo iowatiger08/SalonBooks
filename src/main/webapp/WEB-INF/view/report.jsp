@@ -10,7 +10,8 @@
 </head>
 
 <body>
-	<div class="container"  style="width:500px">
+<jsp:include page="../includes/navbar.jsp"/>
+	<div class="container" >
 		<h1>Salon Books Order Reports</h1>
 
 		<div class="col-md-6" >
@@ -31,7 +32,7 @@
 			</div>
 
 			<div class="panel-body">
-				<table id="OrderTable" class="table table striped">
+				<table id="OrderTable" class="table table-striped">
 					<thead>
 						<tr>
 							<th>Person</th>

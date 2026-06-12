@@ -7,13 +7,14 @@
 <jsp:include page="../includes/headTag.jsp" />
 </head>
 <body>
-	<div class="container" id="pageBox" style="width: 800px">
+<jsp:include page="../includes/navbar.jsp"/>
+	<div class="container" id="pageBox">
 		<h3>Edit Client Info</h3>
 
 		<form:form id="person" modelAttribute="personFlowActions"
 			class="form-horizontal" role="form">
-			<table class="table tabled-bordered  table-condensed"
-				style="width: 600px">
+			<table class="table table-bordered  table-condensed"
+				style="width:100%">
 				<tbody>
 					<tr>
 						<td align="left" valign="top">

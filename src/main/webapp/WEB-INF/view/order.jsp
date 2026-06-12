@@ -8,7 +8,8 @@
   </head>
 
   <body>
-  <div class="container" id="pageBox" style="width:500px" >
+<jsp:include page="../includes/navbar.jsp"/>
+  <div class="container" id="pageBox" >
 	<h2>Order Info</h2>
 	
 		<form:form id="order" modelAttribute="orderFlowActions" role="form">
@@ -25,7 +26,7 @@
       <a href="../../../person/${person.primaryPhoneNumber}" >Edit Person </a> | <a href="../../../home" >Home</a> | <a href="../../../person/${person.primaryPhoneNumber}/appointment/${orderFlowActions.appointmentId}" >Edit Appointment</a>
              
 			<div id="formHeaderBanner">
-				<table class="table tabled-bordered  table-condensed" style="width:400px">
+				<table class="table table-bordered  table-condensed">
 					<thead>
 						<tr>
 							<th></th>
@@ -101,7 +102,7 @@
                     </c:if>
                 </tbody>
             </table>
-			<table class="table table-bordered table-condensed" style="width:300px">
+			<table class="table table-bordered table-condensed">
 				<thead>
 					<tr>
 						<th></th>

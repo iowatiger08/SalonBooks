@@ -19,7 +19,9 @@ import org.tigersndragons.salonbooks.model.OrderItem;
 import org.tigersndragons.salonbooks.model.Person;
 import org.tigersndragons.salonbooks.model.flows.AddOrderItemActions;
 import org.tigersndragons.salonbooks.model.flows.OrderFormModel;
+import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
 import org.tigersndragons.salonbooks.model.type.OrderStatusType;
+import org.tigersndragons.salonbooks.repository.AppointmentRepository;
 import org.tigersndragons.salonbooks.service.AddressService;
 import org.tigersndragons.salonbooks.service.AppointmentService;
 import org.tigersndragons.salonbooks.service.EmployeeService;
@@ -36,6 +38,7 @@ public class OrderController {
   @Autowired private AddressService addressService;
   @Autowired private EmployeeService employeeService;
   @Autowired private AppointmentService appointmentService;
+  @Autowired private AppointmentRepository appointmentRepository;
 
   public void setItemService(ItemService itemService) {
     this.itemService = itemService;
@@ -57,9 +60,15 @@ public class OrderController {
   public String startNewOrder(
       @PathVariable("phoneNumberEntered") String phoneNumberEntered, Model model) {
     Person person = personService.lookupByPhoneNumber(phoneNumberEntered);
-    Order order =
-        orderService.createOrderForPerson(
-            person, appointmentService.createAppointmentForPerson(person));
+    // Reuse the most recent OPEN appointment; only create a new one if none exists.
+    Appointment appt =
+        appointmentRepository
+            .findByPersonAndAppointmentStatusTypeOrderByAppointmentDateDesc(
+                person, AppointmentStatusType.OPEN)
+            .stream()
+            .findFirst()
+            .orElseGet(() -> appointmentService.createAppointmentForPerson(person));
+    Order order = orderService.createOrderForPerson(person, appt);
     orderService.saveOrder(order);
     model.addAttribute("appointment", order.getAppointment());
     model.addAttribute("person", order.getPerson());

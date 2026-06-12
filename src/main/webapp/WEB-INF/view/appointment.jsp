@@ -5,7 +5,8 @@
 <jsp:include page="../includes/headTag.jsp"/>
 </head>
 
-  <body class="container 400px">
+  <body>
+<jsp:include page="../includes/navbar.jsp"/>
 	<h3>Appointment Info</h3>
 	<div id="personBanner">
 	<h3><c:out value="Name: ${person.firstName} ${person.lastName}"/> <small><c:out value="Phone: ${person.primaryPhoneNumber} "/></small></h3>
@@ -19,13 +20,13 @@
 		<div class="row form-group form-group-md" >
 		<label class="col-md-6 control-label" for="apptDate">Appointment Date</label>
 		<div class="col-md-8" id="apptDate">
-		<form:select name="entityDate" path="entityDate" class="form-control" style="width:75px">
+		<form:select name="entityDate" path="entityDate" class="form-control">
 				<form:options items="${DATES}" />
 			</form:select> 
-		 <form:select name="entityMonth" path="entityMonth" class="form-control" style="width:75px">
+		 <form:select name="entityMonth" path="entityMonth" class="form-control">
 				<form:options items="${MONTHS}" />
 			</form:select> 
-		 <form:select name="entityYear" path="entityYear" class="form-control" style="width:100px">
+		 <form:select name="entityYear" path="entityYear" class="form-control">
 				<form:options items="${YEARS}" />
 			</form:select>
 			<form:hidden path="appointmentDate" />
@@ -36,10 +37,10 @@
 		<div class="row form-group form-group-md">
 		<label class="col-md-6 control-label" for="apptTime">Appointment Time</label>
 		<div class="col-md-8" id="apptTime">
-		 <form:select name="entityHour" path="entityHour" class="form-control"  style="width:75px">
+		 <form:select name="entityHour" path="entityHour" class="form-control" >
 				<form:options items="${HOURS}" />
 			</form:select>
-		 : <form:select name="entityMinute" path="entityMinute" class="form-control"  style="width:75px">
+		 : <form:select name="entityMinute" path="entityMinute" class="form-control" >
 				<form:options items="${MINUTES}" />
 			</form:select>
 			</div>
@@ -67,7 +68,7 @@
 		<label class="col-md-6 control-label"for="addOrdertoAppointment" >Add Order to Appointment:</label> 
 		<form:checkbox id="addOrdertoAppointment" 
 		path="addOrdertoAppointment" 
-		value="addOrdertoAppointment" 
+		value="true" 
 		class="form-control" /> 
 		</div>
 		<div class="row form-group form-group-md">

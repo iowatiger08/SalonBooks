@@ -16,4 +16,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
   List<Appointment> findByPersonAndEmployeeOrderByAppointmentDateDesc(
       Person person, Employee employee);
+
+  List<Appointment> findByPersonAndAppointmentStatusTypeOrderByAppointmentDateDesc(
+      Person person, AppointmentStatusType status);
 }
