@@ -198,8 +198,7 @@
 							<c:forEach items="${appointmentList}" var="appt2">
 
 								<tr>
-									<td><joda:format value="${appt2.appointmentDate}"
-											pattern="MM dd, YYYY HH:mm" /></td>
+									<td>${appt2.appointmentDate}</td>
 									<td><c:out value="${appt2.notes }" /></td>
 									<td><c:out value="${appt2.appointmentStatusType }" /></td>
 									<td><spring:url value="./../person/${ personFlowActions.phoneNumber}/appointment/${appt2.id }"

@@ -9,10 +9,9 @@
 
 <body>
 	<div class="container" id="pageBox" style="width: 600px">
-		<% pageContext.setAttribute("now", new org.joda.time.DateTime()); %>
 		<h2>
 			Store Item List | Date:
-			<joda:format value="${now}" pattern="MM dd, YYYY" />
+			${now}
 			<br />
 		</h2>
 

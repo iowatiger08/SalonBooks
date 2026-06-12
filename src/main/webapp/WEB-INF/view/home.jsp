@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="jakarta.tags.functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
 <head>
 <title>Salon Books</title>
 <jsp:include page="../includes/headTag.jsp" />
@@ -69,8 +68,7 @@
 							<tr>
 								<td><c:out
 										value="${appt.person.lastName}, ${appt.person.firstName} " /></td>
-								<td><joda:format value="${appt.appointmentDate}"
-										pattern="MM dd, YYYY HH:mm" /></td>
+								<td>${appt.appointmentDate}</td>
 								<td><c:out value="${appt.notes }" /></td>
 								<td><spring:url value="/appointment/${appt.id }"
 										var="apptUrl">

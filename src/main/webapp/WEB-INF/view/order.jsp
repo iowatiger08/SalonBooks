@@ -60,7 +60,7 @@
 					</tbody>
 				</table>
 			</div>
-			Order Id: <c:out value="${orderId}" /> | Date: <joda:format value="${order.updateDate}" pattern="MM dd, YYYY"/><br/>
+			Order Id: <c:out value="${orderId}" /> | Date: ${order.updateDate}<br/>
 			<small>** Note, if you happen to add an incorrect item to the order, for now, simply re-enter the item marking the quantity as zero. 
 			The item will still show but not count in the order totals.</small>
                <table  class="table table-striped">
