@@ -17,7 +17,12 @@ public class SecurityConfig {
     http.authorizeHttpRequests(
             auth ->
                 auth.requestMatchers(
-                        "/login", "/error", "/resources/**", "/webjars/**", "/h2-console/**")
+                        "/login",
+                        "/login.jsp*",
+                        "/error",
+                        "/resources/**",
+                        "/webjars/**",
+                        "/h2-console/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
